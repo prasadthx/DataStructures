@@ -3,6 +3,7 @@
 //
 
 #include<iostream>
+#include<map>
 
 using namespace std;
 
@@ -56,10 +57,8 @@ Polynomial Polynomial::addPolynomial(Polynomial secondPolynomial) {
     int j = 0 ;
     int i = 0;
     Polynomial resultant;
-    cout << "Scam: "<<secondPolynomial.totalTerms<<endl;
     while (i <= totalTerms && j <= secondPolynomial.totalTerms){
         if(polynomial[i].exponent==secondPolynomial.polynomial[j].exponent){
-            cout << "In first condition i="<<i<<" j="<<j <<endl;
             resultant.polynomial[k].exponent = polynomial[i].exponent;
             resultant.polynomial[k].coefficient = polynomial[i].coefficient + secondPolynomial.polynomial[j].coefficient;
             i = i + 1;
@@ -67,14 +66,12 @@ Polynomial Polynomial::addPolynomial(Polynomial secondPolynomial) {
             k = k + 1;
         }
         else if (polynomial[i].exponent > secondPolynomial.polynomial[j].exponent){
-            cout << "In second condition i="<<i<<" j="<<j <<endl;
             resultant.polynomial[k].exponent = polynomial[i].exponent;
             resultant.polynomial[k].coefficient = polynomial[i].coefficient;
             i = i + 1;
             k = k + 1;
         }
         else if(polynomial[i].exponent < secondPolynomial.polynomial[j].exponent){
-            cout << "In third condition i="<<i<<" j="<<j <<endl;
             resultant.polynomial[k].exponent = secondPolynomial.polynomial[j].exponent;
             resultant.polynomial[k].coefficient = secondPolynomial.polynomial[j].coefficient;
             j = j + 1;
@@ -82,7 +79,6 @@ Polynomial Polynomial::addPolynomial(Polynomial secondPolynomial) {
         }
     }
     if(i > totalTerms){
-        cout << "In fourth condition" <<endl;
         for(j; j<= secondPolynomial.totalTerms;j++){
             resultant.polynomial[k].coefficient = secondPolynomial.polynomial[j].coefficient;
             resultant.polynomial[k].exponent = secondPolynomial.polynomial[j].exponent;
@@ -90,7 +86,6 @@ Polynomial Polynomial::addPolynomial(Polynomial secondPolynomial) {
         }
     }
     if(j > secondPolynomial.totalTerms){
-        cout << "In fifth condition" <<endl;
         for(i; i<= totalTerms; i++){
             resultant.polynomial[k].coefficient = polynomial[i].coefficient;
             resultant.polynomial[k].exponent = polynomial[i].exponent;
@@ -98,6 +93,38 @@ Polynomial Polynomial::addPolynomial(Polynomial secondPolynomial) {
         }
     }
     resultant.totalTerms = k-1;
+    return resultant;
+}
+
+Polynomial Polynomial::MultiplyPolynomial(Polynomial secondPolynomial) {
+    Polynomial resultant;
+    int k = 0;
+    map<int, int> exponentStorage;
+    int tempCoefficient;
+    int tempExponent;
+    int index = -1;
+    for(int i = 0; i <= totalTerms; i++){
+        for(int j = 0; j <= totalTerms; j++){
+
+            tempCoefficient = polynomial[i].coefficient * secondPolynomial.polynomial[j].coefficient;
+            tempExponent = polynomial[i].exponent + secondPolynomial.polynomial[j].exponent;
+
+            if(exponentStorage[tempExponent]){
+                cout << "Existing "<<tempExponent<<endl;
+                resultant.polynomial[exponentStorage[tempExponent]].exponent += tempExponent;
+                resultant.polynomial[exponentStorage[tempExponent]].coefficient += tempCoefficient;
+            }
+
+            else{
+                cout << "New "<<index<< endl;
+                index = index + 1;
+                exponentStorage[tempExponent] = index;
+                resultant.polynomial[index].exponent = tempExponent;
+                resultant.polynomial[index].coefficient = tempCoefficient;
+            }
+        }
+    }
+    resultant.totalTerms = index;
     return resultant;
 }
 
@@ -110,7 +137,8 @@ int main(){
     S2.DisplayPolynomial();
 //    answer = S.EvaluatePolynomial(23.11);
 //    cout << "The answer is " << answer << endl;
-    S3 = S1.addPolynomial(S2);
+//    S3 = S1.addPolynomial(S2);
+    S3 = S1.MultiplyPolynomial(S2);
     S3.DisplayPolynomial();
     return 0;
 }
