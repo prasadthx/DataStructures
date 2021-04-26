@@ -10,14 +10,14 @@ struct String{
     char Str[20] = "Prasad";
     String(){};
     int Length();
-    void DisplayString()
+    void DisplayString();
     void Concatenate(String B);
     String Copy();
-    String CopyReverse()
+    String CopyReverse();
     int SubString(String S);
     bool IsPalindrome();
     void ReverseString();
-
+    bool StrCompare(String S);
 };
 
 int String::Length() {
@@ -28,6 +28,14 @@ int String::Length() {
     return length;
 }
 
+void String::DisplayString() {
+    int i = 0;
+    while(Str[i]!='\0'){
+        cout << Str[i];
+        i++;
+    }
+}
+
 void String::Concatenate(String B) {
     int length = Length();
     int it = 0;
@@ -36,10 +44,7 @@ void String::Concatenate(String B) {
         it++;
     }
     it = 0;
-    while(Str[it]!='\0'){
-        cout << Str[it];
-        it++;
-    }
+    DisplayString();
 }
 
 String String::Copy() {
@@ -53,10 +58,44 @@ String String::Copy() {
     return B;
 }
 
+void String::ReverseString() {
+    int length = Length();
+    char temp;
+    for(int it=0 ; it < length/2 ; it++){
+        temp = Str[it];
+        Str[it] = Str[(length - 1) - it];
+        Str[(length - 1) - it] = temp;
+    }
+}
+
+String String::CopyReverse() {
+    String B;
+    int length = Length();
+    int it = length;
+    for(it; it > 0 ; it--){
+        B.Str[length-it] = Str[it-1];
+    }
+    B.Str[length] = '\0';
+    return B;
+}
+
+bool String::StrCompare(String S) {
+    int length = Length();
+    int length2 = S.Length();
+    if (length != length2){
+        return false;
+    }
+    for (int i = 0; i < length ; i++){
+        if (Str[i] != S.Str[i]){
+            return false;
+        }
+    }
+    return true;
+}
+
 int main(){
     String S, S1;
-//
-//    cout << S.Length();
-    S.Concatenate(S1);
+    S.ReverseString();
+    S.DisplayString();
     return 0;
 }
