@@ -93,9 +93,20 @@ bool String::StrCompare(String S) {
     return true;
 }
 
+bool String::IsPalindrome() {
+    int length = Length();
+    for (int i = 0; i < length/2; i++){
+        if(Str[i] != Str[(length - 1) - i]){
+            return false;
+        }
+    }
+    return true;
+}
+
 int main(){
     String S, S1;
     S.ReverseString();
     S.DisplayString();
+    cout << '\n' << S.IsPalindrome() <<endl;
     return 0;
 }
