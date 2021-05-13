@@ -8,11 +8,11 @@
 //
 //void ShellSort(int array[], int arrayLength){
 //    int temp;
-//    for(int gap = arrayLength; gap >= 1; gap /= 2){
+//    for(int gap = arrayLength/2; gap >= 1; gap /= 2){
 //        for(int j = gap; j < arrayLength; j++){
 //            temp = array[j];
 //            int i;
-//            for(i = j; i >= gap && array[j - i] > temp; i -= gap){
+//            for(i = j; i >= gap && array[i - gap] > temp; i -= gap){
 //                array[i] = array[i - gap];
 //            }
 //            array[i] = temp;
@@ -46,6 +46,6 @@
 //        cout << *(array + i) << "  " ;
 //    }
 //}
-
-
+//
+//
 ////clang++ ShellSort.cpp -o ShellSort.exe && ShellSort.exe

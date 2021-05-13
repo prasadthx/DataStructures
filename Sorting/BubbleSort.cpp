@@ -45,5 +45,5 @@
 //        cout << *(array + i) << "  " ;
 //    }
 //}
-
+//
 ////clang++ BubbleSort.cpp -o BubbleSort.exe && BubbleSort.exe
