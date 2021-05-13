@@ -47,7 +47,7 @@ void CountingSort(int array[], int arrayLength){
         array[i] = *(outputArray + i);
     }
 
-//    //Deleting the dynamically alloted memory
+    //Deleting the dynamically allotted memory
     delete[] countingArray;
     delete[] outputArray;
 }
