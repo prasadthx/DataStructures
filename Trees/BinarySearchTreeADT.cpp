@@ -115,7 +115,7 @@ void BinarySearchTree::DeleteNode(int key) {
     }
 
     else if(temp->leftChild != nullptr && temp->rightChild != nullptr){
-        Node *successor = temp->leftChild, *successorParent, *temp2;
+        Node *successor = temp->leftChild, *successorParent;
         successorParent = successor;
         while (true){
             if(successor -> leftChild == nullptr){
