@@ -8,10 +8,11 @@
 using namespace std;
 
 class HashTable{
-public:
 
     int MAX_SIZE;
     int *hashTable;
+
+public:
 
     HashTable(int MAX_SIZE){
         this->MAX_SIZE = MAX_SIZE;
